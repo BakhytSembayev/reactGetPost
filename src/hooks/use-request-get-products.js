@@ -1,20 +1,23 @@
 import { useEffect,useState } from "react";
+import { ref,onValue } from "firebase/database";
+import { db } from "../firebase";
 
-export const useREquestGetProducts =(refreshProductsFlag)=>{
+export const useREquestGetProducts =()=>{
 
     const [products, setProducts] = useState([]);    
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setIsLoading(true);
-    
-        fetch('http://localhost:3001/products')
-            .then((loadedData) => loadedData.json())
-            .then((loadedProducts) => {
-                setProducts(loadedProducts);
-            })
-            .finally(() => setIsLoading(false));
-    }, [refreshProductsFlag]);
+        const productsDbRef = ref(db, 'products');
+
+        return onValue(productsDbRef,(snapshot)=>{
+const loadedProducts=snapshot.val() || [];
+console.log(loadedProducts);
+setProducts(loadedProducts);
+setIsLoading(false);
+        });
+       
+    }, []);
 
     return {
         isLoading,

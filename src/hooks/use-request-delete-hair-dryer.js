@@ -5,7 +5,7 @@ export const useRequestDeleteHairDryer = (refreshProducts) => {
 
     const requestDeleteHairDryer = () => {
         setIsDeleting(true);
-        fetch('http://localhost:3001/products/004', {
+        fetch('http://localhost:3001/products/be5a', {
             method: 'DELETE',
         })
             .then((rawResponse) => rawResponse.json())

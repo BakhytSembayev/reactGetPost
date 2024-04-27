@@ -9,7 +9,7 @@ import {useRequestAddVacuumCleaner,
 export const App = () => {
     const [refreshProductsFlag, setRefreshProductsFlag] = useState(false);
     const refreshProducts =()=> setRefreshProductsFlag (!refreshProductsFlag)
-    const {isLoading, products} = useREquestGetProducts(refreshProductsFlag);
+    const {isLoading, products} = useREquestGetProducts();
     const {isCreating,requestAddVacuumCleaner} = useRequestAddVacuumCleaner (refreshProducts);
     const {isUpdating, requestUpdateSmartphone} = useRequestUpdateSmartphone(refreshProducts);
     const {isDeleting, requestDeleteHairDryer} = useRequestDeleteHairDryer(refreshProducts);
@@ -19,7 +19,7 @@ export const App = () => {
         <div className={styles.app}>
             {isLoading
                 ? <div className='loader'></div>
-                : products.map(({ id, name, price }) => (
+                :Object.entries (products).map(([id,{  name, price }]) => (
                     <div key={id}>
                         {name} - {price} руб
                     </div>
