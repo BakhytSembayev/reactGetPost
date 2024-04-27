@@ -1,87 +1,27 @@
 {
   "products": [
     {
-      "id": "1",
+      "id": "001",
       "name": "phone",
       "price": 1000
     },
     {
       "name": "Смартфон",
-      "price": 30900,
+      "price": 20999,
       "id": "002"
     },
     {
-      "id": "e672",
+      "id": "003",
       "name": "Пылесос",
       "price": 4690
     },
     {
-      "id": "9c2b",
-      "name": "Пылесос",
-      "price": 4690
-    },
-    {
-      "id": "3544",
-      "name": "Пылесос",
-      "price": 4690
-    },
-    {
-      "id": "c8e3",
-      "name": "playstation",
-      "price": 30000
-    },
-    {
-      "id": "1674",
-      "name": "playstation",
-      "price": 30000
-    },
-    {
-      "id": "c2ea",
-      "name": "playstation",
-      "price": 30000
-    },
-    {
-      "id": "ce9e",
-      "name": "playstation",
-      "price": 30000
-    },
-    {
-      "id": "ac36",
-      "name": "playstation",
-      "price": 30000
-    },
-    {
-      "id": "e590",
-      "name": "playstation",
-      "price": 30000
-    },
-    {
-      "id": "848b",
+      "id": "be5a",
       "name": "VacuumCleaner",
       "price": 300
     },
     {
-      "id": "cf72",
-      "name": "VacuumCleaner",
-      "price": 300
-    },
-    {
-      "id": "5b97",
-      "name": "VacuumCleaner",
-      "price": 300
-    },
-    {
-      "id": "ff8f",
-      "name": "VacuumCleaner",
-      "price": 300
-    },
-    {
-      "id": "949d",
-      "name": "VacuumCleaner",
-      "price": 300
-    },
-    {
-      "id": "dd4a",
+      "id": "28e9",
       "name": "VacuumCleaner",
       "price": 300
     }

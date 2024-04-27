@@ -1,75 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './App.css';
+import {useRequestAddVacuumCleaner,
+    useRequestDeleteHairDryer,
+    useREquestGetProducts,
+    useRequestUpdateSmartphone
+} from './hooks';
 
 export const App = () => {
-    const [products, setProducts] = useState([]);
-    const [refreshProducts, setRefreshProducts] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isCreating, setIsCreating] = useState(false);
-    const [isUpdating, setIsUpdating] = useState(false);
-    const [isDeleting, setIsDeleting] = useState(false);
+    const [refreshProductsFlag, setRefreshProductsFlag] = useState(false);
+    const refreshProducts =()=> setRefreshProductsFlag (!refreshProductsFlag)
+    const {isLoading, products} = useREquestGetProducts(refreshProductsFlag);
+    const {isCreating,requestAddVacuumCleaner} = useRequestAddVacuumCleaner (refreshProducts);
+    const {isUpdating, requestUpdateSmartphone} = useRequestUpdateSmartphone(refreshProducts);
+    const {isDeleting, requestDeleteHairDryer} = useRequestDeleteHairDryer(refreshProducts);
 
-    useEffect(() => {
-        setIsLoading(true);
-
-        fetch('http://localhost:3001/products')
-            .then((loadedData) => loadedData.json())
-            .then((loadedProducts) => {
-                setProducts(loadedProducts);
-            })
-            .finally(() => setIsLoading(false));
-    }, [refreshProducts]);
-
-    const requestAddVacuumCleaner = () => {
-        setIsCreating(true);
-
-        fetch('http://localhost:3001/products', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                name: 'VacuumCleaner',
-                price: 300,
-            }),
-        })
-            .then((rawResponse) => rawResponse.json())
-            .then((response) => {
-                console.log('playstation добавлен, ответ сервера:', response);
-                setRefreshProducts(!refreshProducts);
-            })
-            .finally(() => setIsCreating(false));
-    };
-    const requestUpdateSmartphone = () => {
-        setIsUpdating(true);
-
-        fetch('http://localhost:3001/products/002', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                name: 'Смартфон',
-                price: 30900,
-            }),
-        })
-            .then((rawResponse) => rawResponse.json())
-            .then((response) => {
-                console.log('Смартфон обновлён, ответ сервера:', response);
-                setRefreshProducts(!refreshProducts);
-            })
-            .finally(() => setIsUpdating(false));
-    };
-
-    const requestDeleteHairDryer = () => {
-        setIsDeleting(true);
-        fetch('http://localhost:3001/products/b919', {
-            method: 'DELETE',
-        })
-            .then((rawResponse) => rawResponse.json())
-            .then((response) => {
-                console.log('Фен удалён, ответ сервера: ', response);
-                setRefreshProducts(!refreshProducts);
-            })
-            .finally(() => setIsDeleting(false));
-    };
-
+    
     return (
         <div className={styles.app}>
             {isLoading
@@ -89,10 +34,12 @@ export const App = () => {
                 Обновить смартфон
             </button>
             <button disabled={isDeleting} onClick={requestDeleteHairDryer}>
-                Удалить фен
+                Удалить VacuumCleaner
             </button>
         </div>
     );
 };
 
 export default App;
+
+//json-server --watch db.json --port 3001
